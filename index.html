@@ -251,6 +251,7 @@ async function sync(){
     const r=await fetch("https://api.github.com/users/gilbertocrv/repos?per_page=100&sort=pushed");
     if(!r.ok) return; const list=await r.json(); let novos=0;
     list.forEach(g=>{
+      if(g.name==="gilbertocrv.github.io") return;
       const known=byId[g.name];
       if(known){ if(g.pushed_at) known.pushed=g.pushed_at.slice(0,10); return; }
       novos++;
